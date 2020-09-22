@@ -40,7 +40,7 @@ Para llevar a cabo una transacción, siga estos pasos.
 3. Ejecute los comandos necesarios.
 4. Llame al método Commit del objeto SqlTransaction para completar la transacción, o al método Rollback para finalizarla. Si la conexión se cierra o elimina antes de que se hayan ejecutado los métodos Commit o Rollback, la transacción se revierte.
 
-Ejemplo 
+**2.2. Un ejemplo en MSSQL**
 
 ```sql
 USE [SistemaVentas]
@@ -86,6 +86,7 @@ Para ejecutar el script hacer click sobre el botón `Ejecutar` (o usar la tecla 
 ## 4. Actividad
 **4.1. Desarrollar Alta de Factura**
 Siguiendo el diseño del formulario `frmFactura` agregar la funcionalidad necesaria para insertar una factura y su detalle en la base de datos.
+
 **![](https://github.com/utn-frc-pav1-3k5-2020/actividad_transacciones_factura/raw/master/resources/frmFactura.png)**
 
 
