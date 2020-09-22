@@ -40,17 +40,41 @@ Para llevar a cabo una transacción, siga estos pasos.
 3. Ejecute los comandos necesarios.
 4. Llame al método Commit del objeto SqlTransaction para completar la transacción, o al método Rollback para finalizarla. Si la conexión se cierra o elimina antes de que se hayan ejecutado los métodos Commit o Rollback, la transacción se revierte.
 
-Ejemplo
+Ejemplo 
+
+```sql
+USE [SistemaVentas]
+
+BEGIN TRY
+    BEGIN TRANSACTION
+		
+		PRINT 'INSERT [Facturas]'
+
+        INSERT INTO [dbo].[Facturas]
+					([nro_factura],[fecha],[cliente],[tipoFactura],[subtotal],[descuento],[borrado])
+		VALUES (458,GETDATE(),11,1,100,0,0)
+
+
+		PRINT 'INSERT [FacturasDetalle]'
+
+		INSERT INTO [dbo].[FacturasDetalle]
+					([id_factura],[id_producto],[precio_unitario],[cantidad],[borrado])
+		VALUES (@@IDENTITY,1,100, 4001,0)
+
+		PRINT 'COMMIT'
+
+        COMMIT
+END TRY
+BEGIN CATCH
+	PRINT 'ROLLBACK'
+    ROLLBACK
+END CATCH
+```
 
 ## 3. Ejecutar Script Base de datos
 **3.1. Iniciar la aplicación `Sql Server Management Studio`**
 
-Solicitará ingresar los datos de la base de datos para generar una conexión, completar los datos y hacer click en **Connect**. Los datos del servidor del labsis son:
-
- - **Tipo Servidor:** Database Engine
- - **Nombre Servidor:** maquis
- - **Autenticación:** SQL Server Authentication.
- 
+Solicitará ingresar los datos de la base de datos para generar una conexión, completar los datos y hacer click en **Connect**. 
  
 **3.2. Abrir archivo `SistemaVentas_Crear_BaseDatos.sql`**
  Ir a la opción `Archivo -> Abrir -> Archivo` (o combinación de teclas `Ctrl + O`) y buscar el archivo SistemaVentas_Crear_BaseDatos.sql en el disco local.
@@ -60,9 +84,13 @@ Solicitará ingresar los datos de la base de datos para generar una conexión, c
 Para ejecutar el script hacer click sobre el botón `Ejecutar` (o usar la tecla `F5`)
 
 ## 4. Actividad
-**4.1. Desarrollar alta de Factura**
+**4.1. Desarrollar Alta de Factura**
 Siguiendo el diseño del formulario `frmFactura` agregar la funcionalidad necesaria para insertar una factura y su detalle en la base de datos.
-**![](https://lh6.googleusercontent.com/YFD4ggTl6VRBKexwXfZtCp-K1OdggX2OLRr-QsiBXkCrKg--9E1nfHGq1i4YQVRB7-eceqqzPbDtALlNX2MlCL04OV4ptGCo6LzEqtB22WLxEtFP5clwEYROQA3KvfOJw4aG9yR2)**
+**![](https://github.com/utn-frc-pav1-3k5-2020/actividad_transacciones_factura/raw/master/resources/frmFactura.png)**
+
+
+
+
 
 ## 5. Versionar en GitHub los cambios locales (add / commit / push)
 
